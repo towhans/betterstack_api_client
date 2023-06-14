@@ -34,7 +34,7 @@ defmodule BetterstackApiClient.MixProject do
       {:tesla, "~> 1.0"},
       {:jason, ">= 1.0.0"},
       {:finch, "~> 0.10"},
-      {:bertex, "~> 1.3"},
+      {:msgpax, "~> 2.0"},
       {:bypass, "~> 2.1", only: :test},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}

@@ -1,7 +1,7 @@
 defmodule BetterstackApiClient do
   @moduledoc false
 
-  @default_api_path "/logs/elixir/logger"
+  @default_api_path "/"
 
   @callback post_logs(Tesla.Client.t(), list(map), String.t()) ::
               {:ok, Tesla.Env.t()} | {:error, term}
@@ -12,11 +12,10 @@ defmodule BetterstackApiClient do
       Tesla.Middleware.FollowRedirects,
       {Tesla.Middleware.Headers,
        [
-         {"x-api-key", api_key},
-         {"content-type", "application/bert"}
+         {"authorization", "Bearer #{api_key}"}, # TODO refactor to source_id
+         {"Content-Type", "application/msgpack"}
        ]},
-      {Tesla.Middleware.BaseUrl, url},
-      {Tesla.Middleware.Compression, format: "gzip"}
+      {Tesla.Middleware.BaseUrl, url}
     ]
 
     Tesla.client(
@@ -26,8 +25,8 @@ defmodule BetterstackApiClient do
   end
 
   @spec post_logs(Tesla.Client.t(), [map], String.t()) :: {:ok, Tesla.Env.t()} | {:error, term}
-  def post_logs(%Tesla.Client{} = client, batch, source_id) when is_list(batch) do
-    body = Bertex.encode(%{"batch" => batch, "source" => source_id})
+  def post_logs(%Tesla.Client{} = client, batch, _source_id) when is_list(batch) do # TODO remove source_id
+    body = Msgpax.pack!(batch)
 
     Tesla.post(client, api_path(), body)
   end
