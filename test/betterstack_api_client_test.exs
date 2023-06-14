@@ -7,7 +7,6 @@ defmodule BetterstackApiClientTest do
   @port 4444
   @path BetterstackApiClient.api_path()
 
-  @api_key "l3kh47jsakf2370dasg"
   @source_id "source2354551"
 
   setup do
@@ -19,7 +18,7 @@ defmodule BetterstackApiClientTest do
   test "ApiClient sends a correct POST request with gzip in bert format", %{bypass: bypass} do
     Bypass.expect_once(bypass, "POST", @path, fn conn ->
       {:ok, body, conn} = Plug.Conn.read_body(conn)
-      assert {"authorization", "Bearer #{@api_key}"} in conn.req_headers
+      assert {"authorization", "Bearer #{@source_id}"} in conn.req_headers
 
       body = TestUtils.decode_logger_body(body)
 
@@ -34,7 +33,7 @@ defmodule BetterstackApiClientTest do
       Plug.Conn.resp(conn, 202, "")
     end)
 
-    client = BetterstackApiClient.new(%{api_key: @api_key, url: "http://localhost:#{@port}"})
+    client = BetterstackApiClient.new(%{source_id: @source_id, url: "http://localhost:#{@port}"})
 
     batch = [
       %{
@@ -48,7 +47,7 @@ defmodule BetterstackApiClientTest do
       }
     ]
 
-    {status, _} = BetterstackApiClient.post_logs(client, batch, @source_id)
+    {status, _} = BetterstackApiClient.post_logs(client, batch)
     assert :ok == status
   end
 end
