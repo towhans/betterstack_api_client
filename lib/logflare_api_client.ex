@@ -1,4 +1,4 @@
-defmodule LogflareApiClient do
+defmodule BetterstackApiClient do
   @moduledoc false
 
   @default_api_path "/logs/elixir/logger"
@@ -21,7 +21,7 @@ defmodule LogflareApiClient do
 
     Tesla.client(
       middlewares,
-      {Tesla.Adapter.Finch, name: LogflareApiClient.Finch, receive_timeout: 30_000}
+      {Tesla.Adapter.Finch, name: BetterstackApiClient.Finch, receive_timeout: 30_000}
     )
   end
 

@@ -1,11 +1,11 @@
-defmodule LogflareApiClientTest do
+defmodule BetterstackApiClientTest do
   use ExUnit.Case
-  alias LogflareApiClient
-  alias LogflareApiClient.TestUtils
+  alias BetterstackApiClient
+  alias BetterstackApiClient.TestUtils
   require Logger
 
   @port 4444
-  @path LogflareApiClient.api_path()
+  @path BetterstackApiClient.api_path()
 
   @api_key "l3kh47jsakf2370dasg"
   @source_id "source2354551"
@@ -38,7 +38,7 @@ defmodule LogflareApiClientTest do
       Plug.Conn.resp(conn, 200, response)
     end)
 
-    client = LogflareApiClient.new(%{api_key: @api_key, url: "http://localhost:#{@port}"})
+    client = BetterstackApiClient.new(%{api_key: @api_key, url: "http://localhost:#{@port}"})
 
     batch = [
       %{
@@ -52,7 +52,7 @@ defmodule LogflareApiClientTest do
       }
     ]
 
-    {:ok, %{body: body}} = LogflareApiClient.post_logs(client, batch, @source_id)
+    {:ok, %{body: body}} = BetterstackApiClient.post_logs(client, batch, @source_id)
 
     assert body == response
   end

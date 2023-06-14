@@ -1,17 +1,17 @@
-defmodule LogflareApiClient.MixProject do
+defmodule BetterstackApiClient.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :logflare_api_client,
+      app: :betterstack_api_client,
       version: "0.3.5",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      description: "A common client interface to the Logflare API.",
+      description: "A common client interface to the Betterstack API.",
       package: [
         licenses: ["MIT"],
-        links: %{"GitHub" => "https://github.com/Logflare/logflare_api_client"}
+        links: %{"GitHub" => "https://github.com/Betterstack/betterstack_api_client"}
       ],
       deps: deps()
     ]
@@ -21,7 +21,7 @@ defmodule LogflareApiClient.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {LogflareApiClient.Application, []}
+      mod: {BetterstackApiClient.Application, []}
     ]
   end
 

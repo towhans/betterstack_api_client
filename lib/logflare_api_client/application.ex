@@ -1,4 +1,4 @@
-defmodule LogflareApiClient.Application do
+defmodule BetterstackApiClient.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,14 +8,14 @@ defmodule LogflareApiClient.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: LogflareApiClient.Worker.start_link(arg)
-      # {LogflareApiClient.Worker, arg}
-      {Finch, name: LogflareApiClient.Finch}
+      # Starts a worker by calling: BetterstackApiClient.Worker.start_link(arg)
+      # {BetterstackApiClient.Worker, arg}
+      {Finch, name: BetterstackApiClient.Finch}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: LogflareApiClient.Supervisor]
+    opts = [strategy: :one_for_one, name: BetterstackApiClient.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
