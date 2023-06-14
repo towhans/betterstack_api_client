@@ -11,7 +11,7 @@ defmodule BetterstackApiClient.MixProject do
       description: "A common client interface to the Betterstack API.",
       package: [
         licenses: ["MIT"],
-        links: %{"GitHub" => "https://github.com/Betterstack/betterstack_api_client"}
+        links: %{"GitHub" => "https://github.com/towhans/betterstack_api_client"}
       ],
       deps: deps()
     ]
